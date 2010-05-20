@@ -64,6 +64,22 @@ module FireWatir
     end
     alias :set :select
 
+    def deselect( item )
+      assert_exists
+      #highlight( :set)
+      wait = false
+      each do |selectBoxItem|
+        if selectBoxItem.selected
+          if selectBoxItem.text == item
+            selectBoxItem.selected = false
+          end
+          wait = true
+        end
+      end
+      self.wait if wait
+      #highlight( :clear)
+    end
+
     #
     # Description:
     #   Selects an item by value. If you need to select multiple items you need to call this function for each item.
